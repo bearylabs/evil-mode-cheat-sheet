@@ -1,9 +1,13 @@
 :root {
+  color-scheme: light dark;
   --bg: #ffffff;
   --fg: #1f2328;
   --muted: #656d76;
   --border: #d1d9e0;
   --raised: #f6f8fa;
+  --accent: #0969da;
+  --mark-bg: #fff1a8;
+  --mark-fg: #1f2328;
   --space: 1rem;
 }
 
@@ -14,6 +18,9 @@
     --muted: #9198a1;
     --border: #3d444d;
     --raised: #21262d;
+    --accent: #4493f8;
+    --mark-bg: #9e6a03;
+    --mark-fg: #ffffff;
   }
 }
 
@@ -38,6 +45,80 @@ main {
 h1 {
   font-size: 1.5rem;
   margin: 0 0 calc(var(--space) * 1.5);
+}
+
+.search {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: calc(var(--space) * 0.75) 0;
+  background: var(--bg);
+  transition: box-shadow 0.15s ease;
+}
+
+@supports (backdrop-filter: blur(1px)) {
+  .search {
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    backdrop-filter: blur(12px) saturate(180%);
+  }
+}
+
+/* Hairline appears only once the bar has something scrolling under it. */
+.search.stuck {
+  box-shadow: 0 1px 0 var(--border);
+}
+
+.search::before {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  width: 0.9rem;
+  height: 0.9rem;
+  transform: translateY(-50%);
+  background: var(--muted);
+  mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><circle cx='6.75' cy='6.75' r='4.75'/><path d='M10.5 10.5 14 14'/></svg>") center / contain no-repeat;
+  pointer-events: none;
+}
+
+#filter {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  color: inherit;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem 0.45rem 2.2rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+#filter::placeholder {
+  color: var(--muted);
+}
+
+#filter:focus {
+  outline: none;
+  background: var(--bg);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+mark {
+  background: var(--mark-bg);
+  color: var(--mark-fg);
+  border-radius: 3px;
+  padding: 0.05em 0.15em;
+  margin: 0 -0.15em;
+}
+
+.empty {
+  color: var(--muted);
+}
+
+/* Beats the display of tr and table in the browser default stylesheet. */
+main [hidden] {
+  display: none;
 }
 
 h2 {
@@ -104,7 +185,7 @@ code {
 }
 
 @media (min-width: 60rem) {
-  .sheet:has(table:nth-of-type(2)) {
+  .sheet:not(.filtering):has(table:nth-of-type(2)) {
     columns: 2;
     column-gap: calc(var(--space) * 2.5);
   }
@@ -115,6 +196,11 @@ code {
     padding: 0;
     background: #fff;
     color: #000;
+  }
+
+  .search,
+  .empty {
+    display: none;
   }
 
   code {

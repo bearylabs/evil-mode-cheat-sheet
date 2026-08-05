@@ -9,9 +9,14 @@
   <body>
     <main>
       <h1>{{ site.title }}</h1>
+      <div class="search" hidden>
+        <input type="search" id="filter" placeholder="Search" autocomplete="off" spellcheck="false">
+      </div>
       <div class="sheet">
         {{ content }}
       </div>
+      <p class="empty" hidden>No matches.</p>
     </main>
+    <script src="assets/filter.js"></script>
   </body>
 </html>

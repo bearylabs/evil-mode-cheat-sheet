@@ -122,20 +122,22 @@ main [hidden] {
 }
 
 h2 {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--muted);
-  margin: 0 0 calc(var(--space) * 0.5);
-  break-after: avoid;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin: 0 0 calc(var(--space) * 0.75);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section {
+  break-inside: avoid;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin: 0 0 calc(var(--space) * 1.5);
-  break-inside: avoid;
 }
 
 th {
@@ -180,12 +182,12 @@ code {
 }
 
 /* Columns appear on their own once a second section exists. */
-.sheet:not(:has(table:nth-of-type(2))) {
+.sheet:not(:has(.section:nth-of-type(2))) {
   max-width: 44rem;
 }
 
 @media (min-width: 60rem) {
-  .sheet:not(.filtering):has(table:nth-of-type(2)) {
+  .sheet:not(.filtering):has(.section:nth-of-type(2)) {
     columns: 2;
     column-gap: calc(var(--space) * 2.5);
   }

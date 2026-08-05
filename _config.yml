@@ -1,0 +1,6 @@
+title: Evil Mode Cheat Sheet
+description: Doom Emacs and Vim keybindings worth remembering
+
+exclude:
+  - README.md
+  - shell.nix

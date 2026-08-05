@@ -9,6 +9,7 @@ layout: default
 | --- | --- |
 | `"_` | Run a command without yanking<br>*Redirects to the black hole register, so `"_dd` deletes without clobbering your yank* |
 | `gd` | Go to definition |
+| `/text` | Search forward for `text`<br>*Cycle matches with `n` and `N`, reset the highlight with `:noh` or `:nohlsearch`* |
 
 </div>
 

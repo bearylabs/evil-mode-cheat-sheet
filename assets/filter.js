@@ -70,6 +70,24 @@
   input.addEventListener('input', apply);
   apply();
 
+  // "/" focuses search, like Vim's search key, unless already typing somewhere.
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '/' && document.activeElement !== input &&
+        !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) {
+      e.preventDefault();
+      input.focus();
+    }
+  });
+
+  // Esc clears and cancels the search.
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      input.value = '';
+      apply();
+      input.blur();
+    }
+  });
+
   function stick() {
     search.classList.toggle('stuck', search.getBoundingClientRect().top <= 0);
   }

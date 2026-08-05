@@ -104,6 +104,28 @@ h1 {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
+/* Hint disappears once focused or typed into, so it never fights the query. */
+.hint {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font: inherit;
+  font-size: 0.85rem;
+  line-height: 1;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  pointer-events: none;
+}
+
+#filter:focus + .hint,
+#filter:not(:placeholder-shown) + .hint {
+  display: none;
+}
+
 mark {
   background: var(--mark-bg);
   color: var(--mark-fg);

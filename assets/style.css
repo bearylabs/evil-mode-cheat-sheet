@@ -193,6 +193,23 @@ td em {
   margin-top: 0.15rem;
 }
 
+/* A labelled list of options, the label above a rule down the list's side. */
+td em.lead {
+  margin-top: 0.7rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+/* A second label gets a blank line, it follows a list rather than a sentence. */
+td em.list + em.lead {
+  margin-top: 1.5rem;
+}
+
+td em.list {
+  padding-left: 0.6rem;
+  border-left: 2px solid var(--border);
+}
+
 code {
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   font-size: 0.85em;

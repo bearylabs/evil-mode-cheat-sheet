@@ -7,6 +7,7 @@
 
   var rows = Array.prototype.slice.call(sheet.querySelectorAll('tbody tr'));
   var tables = Array.prototype.slice.call(sheet.querySelectorAll('table'));
+  var sections = Array.prototype.slice.call(sheet.querySelectorAll('.section'));
   var originals = rows.map(function (row) { return row.innerHTML; });
 
   // Wraps matches in <mark>, one text node at a time so the markup around
@@ -54,12 +55,17 @@
       if (keep) visible++;
     });
 
-    // A section with no surviving rows loses its heading too.
+    // A table with no surviving rows goes, and a section whose tables are all
+    // gone takes its heading with it.
     tables.forEach(function (table) {
-      var alive = !!table.querySelector('tbody tr:not([hidden])');
-      table.hidden = !alive;
+      table.hidden = !table.querySelector('tbody tr:not([hidden])');
+      if (table.closest && table.closest('.section')) return;
       var heading = table.previousElementSibling;
-      if (heading && heading.tagName === 'H2') heading.hidden = !alive;
+      if (heading && heading.tagName === 'H2') heading.hidden = table.hidden;
+    });
+
+    sections.forEach(function (section) {
+      section.hidden = !section.querySelector('tbody tr:not([hidden])');
     });
 
     sheet.classList.toggle('filtering', query !== '');

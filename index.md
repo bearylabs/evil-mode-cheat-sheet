@@ -14,12 +14,11 @@ layout: default
 </div>
 
 <div class="section" markdown="1">
-## Ex commands
+## Substitute
 
 | Key | Description |
 | --- | --- |
-| `:s/old/new` | Replace on the current line<br>*No range means the current line, `.` is the explicit form and anchors relative ranges like `.,+3` or `.,$`* |
-| `:%s/old/new` | Replace in the whole file<br>*`%` is the range, every line* |
-| `:5,10s/old/new` | Replace on lines 5 to 10<br>*Any line range works, `'<,'>` is the current selection* |
+| `:s/old/new` | Replace `old` with `new`, current line by default<em>`:[range]s/old/new/[flags]`</em><em class="lead">Ranges go before the `s`:</em><em class="list">`:%s` every line in the file<br>`:5,10s` lines 5 to 10<br>`:'<,'>s` the current selection<br>`:.,+3s` this line and the next three<br>`:.,$s` this line to the end of the file</em><em class="lead">Flags go at the end and combine:</em><em class="list">`/g` every match on a line, not only the first<br>`/gc` every match, confirm each, `y` yes `n` no `a` all `l` last `q` quit<br>`/gi` every match, ignore case, `/gI` force case sensitive<br>`/gn` count the matches, change nothing</em> |
+| `:&&` | Repeat the last substitution with the same flags<br>*`&` in normal mode repeats it but drops the flags, `g&` repeats it with flags over the whole file* |
 
 </div>

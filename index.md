@@ -22,3 +22,18 @@ layout: default
 | `:&&` | Repeat the last substitution with the same flags<br>*`&` in normal mode repeats it but drops the flags, `g&` repeats it with flags over the whole file* |
 
 </div>
+
+<div class="section" markdown="1">
+## Scrolling
+
+| Key | Description |
+| --- | --- |
+| `C-e` | Scroll down one line<br>*Takes a count, so `10C-e` scrolls down ten lines* |
+| `C-y` | Scroll up one line<br>*Takes a count the same way* |
+| `C-d` | Scroll half a page down, cursor moves with the page |
+| `C-u` | Scroll half a page up, cursor moves with the page |
+| `C-f` | Scroll a full page forward |
+| `C-b` | Scroll a full page back |
+| `zz` | Re-center the window around the cursor, cursor stays put<em class="lead">The other two put the cursor's line at an edge:</em><em class="list">`zt` cursor's line to the top of the window<br>`zb` cursor's line to the bottom</em> |
+
+</div>
